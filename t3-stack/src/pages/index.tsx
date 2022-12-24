@@ -1,12 +1,9 @@
 import { type NextPage } from 'next';
 import Head from 'next/head';
 import { signIn, signOut, useSession } from 'next-auth/react';
-
-import { trpc } from '../utils/trpc';
+import Link from 'next/link';
 
 const Home: NextPage = () => {
-  const hello = trpc.example.hello.useQuery({ text: 'from tRPC' });
-
   return (
     <>
       <Head>
@@ -21,11 +18,9 @@ const Home: NextPage = () => {
             <span className='text-[hsl(280,100%,70%)]'>T3</span> stack .
           </h1>
 
-          <div className='flex flex-col items-center gap-2'>
-            <p className='text-2xl text-white'>
-              {hello.data ? hello.data.greeting : 'Loading tRPC query...'}
-            </p>
-            <AuthShowcase />
+          <div className='flex flex-col items-center gap-6'>
+            <Auth />
+            <NavigateToGuestBook />
           </div>
         </div>
       </main>
@@ -35,19 +30,13 @@ const Home: NextPage = () => {
 
 export default Home;
 
-const AuthShowcase: React.FC = () => {
+const Auth: React.FC = () => {
   const { data: sessionData } = useSession();
-
-  const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined },
-  );
 
   return (
     <div className='flex flex-col items-center justify-center gap-4'>
-      <p className='text-center text-2xl text-white'>
+      <p className='pb-8 text-center text-2xl text-white'>
         {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-        {secretMessage && <span> - {secretMessage}</span>}
       </p>
       <button
         className='rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20'
@@ -57,4 +46,20 @@ const AuthShowcase: React.FC = () => {
       </button>
     </div>
   );
+};
+
+const NavigateToGuestBook: React.FC = () => {
+  const { data: sessionData } = useSession();
+
+  if (!sessionData) {
+    return null;
+  } else {
+    return (
+      <Link href='/guestbook'>
+        <button className='rounded-full bg-white/10 px-6 py-3 font-semibold text-white no-underline transition hover:bg-white/20'>
+          Guestbook
+        </button>
+      </Link>
+    );
+  }
 };

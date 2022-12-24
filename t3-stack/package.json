@@ -6,6 +6,7 @@
     "build": "next build",
     "dev": "next dev",
     "postinstall": "prisma generate",
+    "format": "prettier --write \"**/*.{ts,tsx,css,md}\"",
     "lint": "next lint",
     "start": "next start"
   },
@@ -17,6 +18,7 @@
     "@trpc/next": "^10.0.0",
     "@trpc/react-query": "^10.0.0",
     "@trpc/server": "^10.0.0",
+    "moment": "^2.29.4",
     "next": "13.0.2",
     "next-auth": "^4.18.3",
     "react": "18.2.0",

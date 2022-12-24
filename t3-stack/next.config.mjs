@@ -13,5 +13,8 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  images: {
+    domains: ["https://raw.githubusercontent.com", "localhost"],
+  },
 };
 export default config;
