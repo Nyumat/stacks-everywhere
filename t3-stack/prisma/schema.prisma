@@ -47,7 +47,6 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -71,4 +70,6 @@ model GuestBook {
   createdAt DateTime @default(now())
   name      String
   message   String @db.VarChar(500)
+  likes     String[] @default([])
+  dislikes  String[] @default([])
 }
