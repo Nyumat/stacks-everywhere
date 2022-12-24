@@ -1,7 +1,7 @@
 # Stacks, everywhere.
 
 ## Introduction
-#
+
 
 Recently I've been exploring many new web technologies, frameworks, and methods. I couldn't find a "one fits all" meta framework, so I'll be making random full stack applications in this repository. 
 
@@ -17,7 +17,7 @@ The 4 main criterion will be: (1-5)
 
 *The Readme will contain a breakdown of each stack's ratings.*
  
-#
+
 
 ## The [T3 Stack](https://create.t3.gg/)
 
@@ -43,7 +43,7 @@ Overall I *really* liked this stack.
 
 The great thing here with T3 is the end-to-end type safety that you get wit tRPC, Prisma, and TypeScript. Truly gamechanging. However, this ofc does add to the TTS.
 
-#
+
 
 ## The [MERN Stack](https://www.mongodb.com/mern-stack)
 
@@ -66,7 +66,6 @@ I *adore* this stack. I have the most experience with it, and I love how it does
 
 I pick the router, I pick the styling solution, I pick the data fetching strategy. The one thing I will say though, is this stack is un-opionated to a a...crux?
 
-#
 ## The [SvelteKit Stack](https://kit.svelte.dev/)
 
 I have been fascinated with what Rich Harris has done with Svelte and now SvelteKit for some time now.
