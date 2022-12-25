@@ -3,7 +3,7 @@
 ## Introduction
 
 
-Recently I've been exploring many new web technologies, frameworks, and methods. I couldn't find a "one fits all" meta framework, so I'll be making random full stack applications in this repository. 
+Recently I've been exploring many new web technologies, frameworks, and methods for developing web applications. I couldn't find a "one fits all" meta framework, so I'll be making random full stack applications in this repository to put popular tech stacks to the test. 
 
 There will be many types of web tech being used, to hopefully find what out what I enjoy.
 
@@ -23,27 +23,25 @@ The 4 main criterion will be: (1-5)
 
 This one is definitely the most trendy. It's a opt-in boostrap for the full stack ecosystem containing:
 
-- TypeScript
 - Next.js
-- Prisma ORM
-- PostgreSQL
-- tRPC
-- NextAuth.js
+- TypeScript
 - Tailwind CSS
+- tRPC
+- Prisma
+- PostgreSQL
+- NextAuth.js
 
 ### Ratings
 
 - Developer Experience (DX): **5/5**
-- Performance: **3/5**
-- Time To Ship: **1/5**
-- Community/Popularity: **2.5/5**
-- Functionality & Sustainability: **4.5/5**
+- Performance: **4/5**
+- Time To Ship: **5/5**
+- Community/Popularity: **2/5**
+- Functionality & Sustainability: **5/5**
 
-Overall I *really* liked this stack. 
+Overall I *greatly* enjoy this stack. 
 
-The great thing here with T3 is the end-to-end type safety that you get wit tRPC, Prisma, and TypeScript. Truly gamechanging. However, this ofc does add to the TTS.
-
-
+The great thing here with T3 is the end-to-end type safety that you get through the entire stack. Truly gamechanging. I found adding features to be predictable, reliable, and quick. The only issue with T3 is that it's constantly undergoing improvements, which can cause breaking changes.
 
 ## The [MERN Stack](https://www.mongodb.com/mern-stack)
 
@@ -51,13 +49,13 @@ MERN has to be the ol' faithful on this list. Whenever I need a quick app shippe
 
 - MongoDB
 - Express.js
-- Plain React.js 
+- React.js 
 - Node.js
 
 ### Ratings
 
-- Developer Experience (DX): **2.5/5**
-- Performance: **1.5/5**
+- Developer Experience (DX): **3/5**
+- Performance: **3/5**
 - Time To Ship: **5/5**
 - Community/Popularity: **5/5**
 - Functionality & Sustainability: **4.5/5**
@@ -70,7 +68,7 @@ I pick the router, I pick the styling solution, I pick the data fetching strateg
 
 I have been fascinated with what Rich Harris has done with Svelte and now SvelteKit for some time now.
 
-It's awesome to know that there's frameworks for people who don't want to deal with JSX. I love that when writing svelte code, everything simply feels like magic.
+It's awesome to know that there's frameworks for people who don't want to deal with syntactical sugar. I love that when writing svelte code, everything simply feels like magic, and I can write pure JS/TS, CSS, and HTML like the "old days".
 
 - Svelte
 - TypeScript + ESLint
@@ -85,4 +83,25 @@ It's awesome to know that there's frameworks for people who don't want to deal w
 - Community/Popularity: **3.5/5**
 - Functionality & Sustainability: **4./5**
 
-I didn't even need to do anything post install because the demo app 'Sverdle' is so good that it doesn't deseerve modification. Can't wait to see the future of Svelte.
+I'll likely create a mock of [NyumatFlix](https://github.com/nyumat/nyumatflix) with SvelteKit to put it to the test as I really want to know how it handles SSR and data fetching. Can't wait to see the future of Svelte.
+
+## The [WebRustWeb Stack](https://www.rust-lang.org/what/wasm)
+
+I haven't gotten to use rust yet, so I thought that including a Web Assembly Rust "stack" in this repo would be fun to tinker around with.
+
+I definitely won't be able to make as many features as I'm able to with the other stacks, but learning about rust will be fun, since it seems to have all the hype in system dev right now.
+
+- WebAssembly
+- Rust
+- Webpack
+- JavaScript
+
+### Ratings
+
+- Developer Experience (DX): **?/5**
+- Performance: **5/5**
+- Time To Ship: **2/5**
+- Community/Popularity: **4/5**
+- Functionality & Sustainability: **2/5**
+
+I haven't done much with it yet so I put a '?' for the DX, but I do like rust so far.  I ran into a few errors, to say the least which made getting the development enviornment running and iterable quite a pain.
