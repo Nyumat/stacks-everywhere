@@ -6,6 +6,7 @@ import Link from 'next/link';
 import moment from 'moment';
 import { Puff } from 'react-loader-spinner';
 import { ThreeDots } from 'react-loader-spinner';
+import Layout from '../../components/Layout';
 
 const Messages = () => {
   const { data: messages, isLoading } = trpc.guestbook.getAllMessages.useQuery();
@@ -227,21 +228,28 @@ export default function Guestbook(): JSX.Element {
   }
 
   return (
-    <>
+    <Layout>
       <Head>
-        <title>T3 Stack - GuestBook</title>
+        <title>Message Board</title>
         <meta name='description' content='Guestbook' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className='flex min-h-screen flex-col items-center justify-start bg-gradient-to-b from-[#2e026d] to-[#15162c]'>
         <div className='container flex flex-col items-center justify-center gap-16 px-4 py-16 '>
           <h1 className='text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]'>
-            <span className='text-[hsl(280,100%,70%)]'>AskFFM</span>
+            <span className='bg-gradient-to-r from-[hsl(280,97%,44%)] to-[#6a00ff] bg-clip-text text-7xl font-extrabold text-transparent'>
+              Message Board
+            </span>
           </h1>
 
           {session?.user ? (
             <>
               <div className='flex flex-col items-center justify-center gap-6'>
+                <Link href='/'>
+                  <button className='rounded-md bg-[#9c68e4] px-4 py-2 text-white'>
+                    Return Home
+                  </button>
+                </Link>
                 <h2 className='text-2xl font-extrabold tracking-tight text-white sm:text-[2rem]'>
                   Welcome {session.user?.name}
                 </h2>
@@ -250,11 +258,6 @@ export default function Guestbook(): JSX.Element {
               <div>
                 <Messages />
               </div>
-              <Link href='/'>
-                <button className='rounded-md bg-[#2e026d] px-4 py-2 text-white'>
-                  Return Home
-                </button>
-              </Link>
             </>
           ) : (
             <div className='flex flex-col items-center justify-center gap-16'>
@@ -275,6 +278,6 @@ export default function Guestbook(): JSX.Element {
           )}
         </div>
       </main>
-    </>
+    </Layout>
   );
 }

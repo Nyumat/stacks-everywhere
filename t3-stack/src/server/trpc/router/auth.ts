@@ -7,4 +7,7 @@ export const authRouter = router({
   getSecretMessage: protectedProcedure.query(() => {
     return 'Secret Message! 0.o';
   }),
+  getAllUsers: protectedProcedure.query(async ({ ctx }) => {
+    return await ctx.prisma.user.findMany();
+  }),
 });

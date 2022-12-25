@@ -2,8 +2,9 @@ import { type AppType } from 'next/app';
 import { type Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 // import DownUpTransition from '../components/DownUpTransition';
-import UpUpTransition from '../components/UpUpTransition';
-// import PopOutTransition from '../components/PopOutTransition';
+// import UpUpTransition from '../components/UpUpTransition';
+import PopOutTransition from '../components/PopOutTransition';
+import { NextUIProvider } from '@nextui-org/react';
 
 import { trpc } from '../utils/trpc';
 
@@ -15,11 +16,13 @@ const MyApp: AppType<{ session: Session | null }> = ({
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <UpUpTransition>
+    <NextUIProvider>
+    <PopOutTransition>
       <SessionProvider session={session}>
         <Component {...pageProps} />
       </SessionProvider>
-    </UpUpTransition>
+      </PopOutTransition>
+    </NextUIProvider>
   );
 };
 
