@@ -14,7 +14,7 @@ interface LayoutProps {
 
 export default function Layout({ children, home }: LayoutProps) {
   const { data: session } = useSession();
-  const [image, setImage] = useState<string | undefined>('');
+  const [image, setImage] = useState<string | undefined>(`${session?.user?.image} ? ${session?.user?.image} : ''`);
   const [isNavigating, setIsNavigating] = useState(false);
 
   const router = useRouter();
