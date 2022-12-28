@@ -17,10 +17,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <NextUIProvider>
-    <PopOutTransition>
-      <SessionProvider session={session}>
-        <Component {...pageProps} />
-      </SessionProvider>
+      <PopOutTransition>
+        <SessionProvider session={session}>
+          <Component {...pageProps} />
+        </SessionProvider>
       </PopOutTransition>
     </NextUIProvider>
   );
