@@ -14,7 +14,7 @@ const config = {
     defaultLocale: "en",
   },
   images: {
-    domains: ["https://raw.githubusercontent.com", "localhost", "lh3.googleusercontent.com"],
+    domains: ["raw.githubusercontent.com", "localhost", "lh3.googleusercontent.com"],
   },
 };
 export default config;
