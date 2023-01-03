@@ -1,20 +1,22 @@
 import Head from 'next/head';
 import { useSession } from 'next-auth/react';
 import { Avatar } from '@nextui-org/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { signIn, signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { Puff } from 'react-loader-spinner';
+import {type Session } from 'next-auth';
 
 interface LayoutProps {
   children: React.ReactNode;
   home?: boolean;
+  image?: string | null | undefined;
+  session?: Session | null;
 }
 
-export default function Layout({ children, home }: LayoutProps) {
-  const { data: session } = useSession();
-  const [image, setImage] = useState<string | undefined>(`${session?.user?.image} ? ${session?.user?.image} : ''`);
+export default function Layout({ children, home, image, session }: LayoutProps) {
+
   const [isNavigating, setIsNavigating] = useState(false);
 
   const router = useRouter();
@@ -29,12 +31,6 @@ export default function Layout({ children, home }: LayoutProps) {
     });
   };
 
-  useEffect(() => {
-    if (session?.user?.image) {
-      setImage(session.user.image);
-    }
-  }, [session]);
-
   if (home) {
     return (
       <>
@@ -45,7 +41,7 @@ export default function Layout({ children, home }: LayoutProps) {
         </Head>
         <main className='flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] pb-16'>
           <div className='container mr-16 mb-16 flex flex-row items-center justify-end gap-16'>
-            {session?.user?.image ? (
+            {image ? (
               <div className='flex flex-col items-center justify-center gap-4'>
                 {isNavigating ? (
                   <Puff
@@ -61,7 +57,8 @@ export default function Layout({ children, home }: LayoutProps) {
                 ) : (
                   <Avatar
                     size='lg'
-                    src={image}
+                    src={image ? image : ''}
+                    loading='eager'
                     bordered
                     color='gradient'
                     className='hover:cursor-pointer'
@@ -69,7 +66,7 @@ export default function Layout({ children, home }: LayoutProps) {
                   />
                 )}
                 <h1 className='text-sm font-extrabold tracking-tight text-white'>
-                  {session.user?.name}
+                  {session?.user?.name}
                 </h1>
               </div>
             ) : null}
