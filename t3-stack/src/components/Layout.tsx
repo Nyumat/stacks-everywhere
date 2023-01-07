@@ -1,21 +1,27 @@
 import Head from 'next/head';
 import { useSession } from 'next-auth/react';
 import { Avatar } from '@nextui-org/react';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { signIn, signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { Puff } from 'react-loader-spinner';
+import { type Session } from 'next-auth';
 
 interface LayoutProps {
   children: React.ReactNode;
   home?: boolean;
+  image?: string | null | undefined;
+  session?: Session | null;
 }
 
-export default function Layout({ children, home }: LayoutProps) {
-  const { data: session } = useSession();
-  const [image, setImage] = useState<string | undefined>(`${session?.user?.image} ? ${session?.user?.image} : ''`);
+interface AuthProps {
+  sessionData: Session | null | undefined;
+}
+
+export default function Layout({ children, home, image, session }: LayoutProps) {
   const [isNavigating, setIsNavigating] = useState(false);
+  const [sessionData, setSessionData] = useState<Session | null | undefined>(session);
 
   const router = useRouter();
   const navigateProfile = () => {
@@ -30,9 +36,7 @@ export default function Layout({ children, home }: LayoutProps) {
   };
 
   useEffect(() => {
-    if (session?.user?.image) {
-      setImage(session.user.image);
-    }
+    setSessionData(session);
   }, [session]);
 
   if (home) {
@@ -45,7 +49,7 @@ export default function Layout({ children, home }: LayoutProps) {
         </Head>
         <main className='flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] pb-16'>
           <div className='container mr-16 mb-16 flex flex-row items-center justify-end gap-16'>
-            {session?.user?.image ? (
+            {sessionData ? (
               <div className='flex flex-col items-center justify-center gap-4'>
                 {isNavigating ? (
                   <Puff
@@ -61,7 +65,9 @@ export default function Layout({ children, home }: LayoutProps) {
                 ) : (
                   <Avatar
                     size='lg'
-                    src={image}
+                    src={sessionData.user?.image as string}
+                    alt='Profile Picture'
+                    loading='eager'
                     bordered
                     color='gradient'
                     className='hover:cursor-pointer'
@@ -69,7 +75,7 @@ export default function Layout({ children, home }: LayoutProps) {
                   />
                 )}
                 <h1 className='text-sm font-extrabold tracking-tight text-white'>
-                  {session.user?.name}
+                  {session?.user?.name}
                 </h1>
               </div>
             ) : null}
@@ -98,7 +104,7 @@ export default function Layout({ children, home }: LayoutProps) {
             </h1>
 
             <div className='flex flex-col items-center gap-6'>
-              <Auth />
+              <Auth sessionData={session} />
               <NavigateToGuestBook />
             </div>
           </div>
@@ -110,9 +116,7 @@ export default function Layout({ children, home }: LayoutProps) {
   }
 }
 
-const Auth: React.FC = () => {
-  const { data: sessionData } = useSession();
-
+const Auth = ({ sessionData }: AuthProps) => {
   return (
     <div className='flex flex-col items-center justify-center gap-4'>
       <p className='pb-8 text-center text-2xl text-white'>
