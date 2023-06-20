@@ -3,6 +3,9 @@ name = "wasm-rust-stack"
 version = "0.1.0"
 authors = ["Thomas <nyumat18@gmail.com>"]
 edition = "2018"
+description = "A sample project for wasm-rust-stack"
+license = "MIT"
+repository = "https://github.com/nyumat/spreadfullstack"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
@@ -25,6 +28,33 @@ console_error_panic_hook = { version = "0.1.6", optional = true }
 # compared to the default allocator's ~10K. It is slower than the default
 # allocator, however.
 wee_alloc = { version = "0.4.5", optional = true }
+js-sys = "0.3.64"
+wasm-bindgen-futures = "0.4.37"
+reqwest = "0.11.18"
+three-d = "0.15.0"
+serde-wasm-bindgen = "0.5.0"
+
+[dependencies.serde]
+version = "1.0.164"
+features = ["derive"]
+
+[dependencies.web-sys]
+version = "0.3.64"
+features = [
+      "Window",
+      "Document",
+      "HtmlElement",
+      "HtmlCanvasElement",
+      "Element",
+      "Request",
+      "RequestInit",
+      "RequestMode",
+      "Response",
+      "console",
+]
+
+
+
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3.13"
