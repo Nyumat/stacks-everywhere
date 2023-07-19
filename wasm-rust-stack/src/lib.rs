@@ -1,27 +1,33 @@
-extern crate cfg_if;
+#[macro_use]
 extern crate wasm_bindgen;
+extern crate wasm_bindgen_futures;
 
-mod utils;
-
-use cfg_if::cfg_if;
+use js_sys::Promise;
 use wasm_bindgen::prelude::*;
+use wasm_bindgen_futures::JsFuture;
+use web_sys::{window, Request, RequestInit, RequestMode, Response};
 
-cfg_if! {
-    // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
-    // allocator.
-    if #[cfg(feature = "wee_alloc")] {
-        extern crate wee_alloc;
-        #[global_allocator]
-        static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
-    }
+macro_rules! our_macro {
+    ($url:expr) => {{
+        let mut opts = RequestInit::new();
+        opts.method("GET");
+        opts.mode(RequestMode::Cors);
+
+        let request = Request::new_with_str_and_init($url.as_str(), &opts)?;
+
+        let window = window().unwrap();
+        let resp_value = JsFuture::from(window.fetch_with_request(&request)).await?;
+
+        assert!(resp_value.is_instance_of::<Response>());
+        let resp: Response = resp_value.dyn_into().unwrap();
+
+        let json = JsFuture::from(resp.json()?).await?;
+        Ok(json)
+    }};
 }
 
-#[wasm_bindgen]
-extern {
-    fn alert(s: &str);
-}
 
 #[wasm_bindgen]
-pub fn greet() {
-    alert("Hello, Welcome to Nyumat's take on Rust-WASM stack!");
+pub async fn fetch_external(url: String) -> Result<JsValue, JsValue> {
+    our_macro!(url)
 }
